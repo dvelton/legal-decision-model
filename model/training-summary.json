@@ -1,0 +1,40 @@
+{
+  "architecture": "frozen Laya encoder with a trained stuntd decision head",
+  "metadata": {
+    "base_model": "convaiinnovations/laya",
+    "base_model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+    "clearance_threshold": 0.7811275918857621,
+    "device": "mps",
+    "epochs": 24,
+    "field": "requires_human_lawyer_attention",
+    "head_max_len": 192,
+    "labels": [
+      "NO_HUMAN_LAWYER_ATTENTION",
+      "REQUIRES_HUMAN_LAWYER_ATTENTION"
+    ],
+    "max_false_clear_rate": 0.0,
+    "max_len": 512,
+    "policy_version": "northstar-1.0",
+    "seed": 20261002,
+    "site": "requires_human_lawyer_attention",
+    "spaced_labels": true,
+    "temperature": 6.951190773689928,
+    "trained_at": "2026-10-02T23:31:57.176483+00:00",
+    "training_rows": 7500,
+    "validation_metrics": {
+      "accuracy": 0.742,
+      "attention_recall": 1.0,
+      "brier_score": 0.10203199148808319,
+      "clearance_coverage": 0.242,
+      "clearance_error_rate": 0.0,
+      "false_clear_rate": 0.0,
+      "false_clearances": 0,
+      "routed_for_attention": 758,
+      "safe_clearance_recall": 0.484,
+      "total": 1000,
+      "true_attention": 500,
+      "true_clearances": 242
+    },
+    "validation_rows": 1000
+  }
+}

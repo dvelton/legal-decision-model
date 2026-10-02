@@ -1,0 +1,54 @@
+[project]
+name = "legal-decision-model"
+version = "0.1.0"
+description = "Synthetic proof of concept for conservative legal-attention routing"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "Dan Velton" }]
+keywords = ["legal-operations", "decision-model", "synthetic-data", "laya", "triage"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "fastapi==0.118.0",
+    "laya==0.3.24",
+    "stuntd[train]==0.1.2",
+    "uvicorn==0.37.0",
+]
+
+[project.scripts]
+legal-decision-model = "legal_decision_model.cli:main"
+
+[dependency-groups]
+dev = [
+    "mypy==1.18.2",
+    "pytest==8.4.2",
+    "ruff==0.13.2",
+]
+
+[build-system]
+requires = ["uv_build>=0.11.21,<0.12.0"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "C4", "RUF"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+
+[[tool.mypy.overrides]]
+module = ["laya", "laya.*", "stuntd", "stuntd.*", "torch", "torch.*"]
+ignore_missing_imports = true

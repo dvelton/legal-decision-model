@@ -1,0 +1,37 @@
+{
+  "base_model": "convaiinnovations/laya",
+  "base_model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+  "clearance_threshold": 0.8295544585251035,
+  "device": "mps",
+  "epochs": 3,
+  "field": "requires_human_lawyer_attention",
+  "head_max_len": 192,
+  "labels": [
+    "NO_HUMAN_LAWYER_ATTENTION",
+    "REQUIRES_HUMAN_LAWYER_ATTENTION"
+  ],
+  "max_false_clear_rate": 0.0,
+  "max_len": 512,
+  "policy_version": "northstar-1.0",
+  "seed": 20261002,
+  "site": "requires_human_lawyer_attention",
+  "spaced_labels": true,
+  "temperature": 1.5261343265102887,
+  "trained_at": "2026-10-02T22:33:35.141202+00:00",
+  "training_rows": 2400,
+  "validation_metrics": {
+    "accuracy": 0.7733333333333333,
+    "attention_recall": 1.0,
+    "brier_score": 0.09712268224881809,
+    "clearance_coverage": 0.2733333333333333,
+    "clearance_error_rate": 0.0,
+    "false_clear_rate": 0.0,
+    "false_clearances": 0,
+    "routed_for_attention": 218,
+    "safe_clearance_recall": 0.5466666666666666,
+    "total": 300,
+    "true_attention": 150,
+    "true_clearances": 82
+  },
+  "validation_rows": 300
+}
