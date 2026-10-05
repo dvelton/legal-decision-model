@@ -1,12 +1,10 @@
 # Legal Decision Model
 
-Legal Decision Model is a local research project with one external output: whether a fictional
-corporate request requires human lawyer attention.
+Legal Decision Model is a local proof of concept with one job: read a fictional corporate request and decide whether it requires human lawyer attention.
 
-The model is trained only on generated fictional data. It does not interpret law, give legal
-advice, or replace professional judgment. Requests that are uncertain, unfamiliar, too long,
-outside the fictional policy, or unsupported by the validation evidence are routed to human
-attention.
+The project generates its own synthetic data, trains a small decision head on the Apache-licensed Laya encoder, and applies a conservative clearance threshold. A request receives NO_HUMAN_LAWYER_ATTENTION only when the model is sufficiently confident. Everything else receives REQUIRES_HUMAN_LAWYER_ATTENTION.
+
+This is a demonstration, not legal advice. It has not been tested on real legal matters and should not be used to bypass legal, compliance, privacy, security, employment, or regulatory review.
 
 ## What the project demonstrates
 
