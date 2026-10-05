@@ -1,8 +1,5 @@
 # A Policy-Grounded Decision Model for Synthetic Legal-Attention Routing
 
-Dan Velton  
-October 4, 2026
-
 ## Abstract
 
 This project tests whether a small local model can make one constrained routing decision: whether a
