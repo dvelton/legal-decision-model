@@ -3,11 +3,10 @@
 from dataclasses import dataclass, fields
 from typing import Any
 
-from legal_decision_model.constants import (
-    NO_ATTENTION,
-    POLICY_VERSION,
-    REQUIRES_ATTENTION,
-)
+from legal_decision_model.constants import DEFAULT_POLICY_PATH
+from legal_decision_model.policy_schema import PolicySpec, load_policy
+
+DEFAULT_POLICY = load_policy(DEFAULT_POLICY_PATH)
 
 
 @dataclass(frozen=True)
@@ -44,20 +43,7 @@ class ScenarioFacts:
         return {item.name: getattr(self, item.name) for item in fields(self)}
 
 
-TRIGGER_REASONS = {
-    "legal_interpretation": "The request asks for individualized legal interpretation.",
-    "nonstandard_contract_terms": "The request includes nonstandard contract terms.",
-    "dispute_or_claim": "The request involves a dispute, claim, or threatened claim.",
-    "regulator_or_government_contact": "A regulator or government authority is involved.",
-    "sensitive_personal_data": "The request involves sensitive personal data.",
-    "security_incident": "The request involves a security incident or suspected compromise.",
-    "employment_action": "The request involves an individualized employment action.",
-    "intellectual_property_ownership": "The request raises intellectual-property ownership.",
-    "new_jurisdiction": "The request involves a jurisdiction outside the approved playbook.",
-    "material_external_commitment": "The request would create a material external commitment.",
-    "incomplete_or_conflicting_facts": "The supplied facts are incomplete or conflicting.",
-    "outside_approved_playbook": "The request falls outside an approved self-service playbook.",
-}
+TRIGGER_REASONS = DEFAULT_POLICY.trigger_reasons
 
 
 @dataclass(frozen=True)
@@ -67,20 +53,34 @@ class PolicyDecision:
     label: str
     requires_human_lawyer_attention: bool
     reasons: tuple[str, ...]
-    policy_version: str = POLICY_VERSION
+    policy_version: str = DEFAULT_POLICY.version
+
+
+def evaluate_facts(
+    facts: dict[str, bool],
+    policy: PolicySpec = DEFAULT_POLICY,
+) -> PolicyDecision:
+    """Apply a compiled policy to a structured fact mapping."""
+    validated = policy.validate_facts(facts)
+    reasons = [policy.trigger_reasons[name] for name in policy.triggers if validated[name]]
+    reasons.extend(
+        policy.prerequisite_reasons[name] for name in policy.prerequisites if not validated[name]
+    )
+    if reasons:
+        return PolicyDecision(
+            policy.requires_attention_label,
+            True,
+            tuple(reasons),
+            policy.version,
+        )
+    return PolicyDecision(
+        policy.no_attention_label,
+        False,
+        (policy.success_reason,),
+        policy.version,
+    )
 
 
 def evaluate_policy(facts: ScenarioFacts) -> PolicyDecision:
     """Apply the fictional policy conservatively."""
-    reasons = [
-        reason for field_name, reason in TRIGGER_REASONS.items() if getattr(facts, field_name)
-    ]
-    if not facts.approved_self_service_process:
-        reasons.append("No approved self-service process fully resolves the request.")
-    if reasons:
-        return PolicyDecision(REQUIRES_ATTENTION, True, tuple(reasons))
-    return PolicyDecision(
-        NO_ATTENTION,
-        False,
-        ("An approved self-service process fully resolves the complete request.",),
-    )
+    return evaluate_facts(facts.to_dict())

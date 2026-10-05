@@ -11,6 +11,8 @@ wheels/
 
 # Local model and runtime artifacts
 artifacts/
+benchmark/
+policy-model.work/
 .cache/
 .DS_Store
 

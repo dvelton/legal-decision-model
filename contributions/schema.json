@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/dvelton/legal-decision-model/contributions/schema.json",
+  "title": "Fictional legal-decision behavioral case",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "case_id",
+    "policy_version",
+    "fictional_original_content",
+    "family",
+    "capabilities",
+    "changed_facts",
+    "safe",
+    "attention",
+    "review"
+  ],
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{2,79}$"
+    },
+    "policy_version": {
+      "type": "string"
+    },
+    "fictional_original_content": {
+      "const": true,
+      "description": "Confirms that the case is fictional, newly written, and contains no real matter data."
+    },
+    "family": {
+      "type": "string"
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "changed_facts": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "safe": {
+      "$ref": "#/$defs/record"
+    },
+    "attention": {
+      "$ref": "#/$defs/record"
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "pending",
+            "accepted",
+            "rejected"
+          ]
+        },
+        "reviewer": {
+          "type": "string"
+        },
+        "reviewed_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "facts",
+        "renderings"
+      ],
+      "properties": {
+        "facts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          }
+        },
+        "renderings": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "minLength": 20
+          }
+        }
+      }
+    }
+  }
+}

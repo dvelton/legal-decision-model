@@ -5,7 +5,7 @@ import random
 from dataclasses import dataclass, replace
 from pathlib import Path
 
-from legal_decision_model.constants import DATA_DIR, SPLIT_SIZES
+from legal_decision_model.constants import DATA_DIR, LEGACY_SPLIT_SIZES
 from legal_decision_model.policy import ScenarioFacts, evaluate_policy
 from legal_decision_model.records import DecisionRecord, write_jsonl
 
@@ -612,9 +612,9 @@ def generate_split(split: str, size: int, seed: int) -> list[DecisionRecord]:
 def generate_dataset(output_dir: Path = DATA_DIR, seed: int = 20261002) -> dict[str, Path]:
     """Generate all reproducible dataset splits and training adapters."""
     paths: dict[str, Path] = {}
-    for split, size in SPLIT_SIZES.items():
+    for split, size in LEGACY_SPLIT_SIZES.items():
         records = generate_split(split, size, seed)
         path = output_dir / f"{split}.jsonl"
-        write_jsonl(path, records)
+        write_jsonl(path, records, legacy=True)
         paths[split] = path
     return paths

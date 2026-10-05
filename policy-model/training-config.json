@@ -1,0 +1,64 @@
+{
+  "base_model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+  "head": {
+    "dropout": 0.15,
+    "families": [
+      "contracts",
+      "privacy",
+      "security",
+      "intellectual_property",
+      "marketing",
+      "employment",
+      "disputes",
+      "corporate",
+      "product",
+      "legal_operations"
+    ],
+    "hidden_size": 256,
+    "input_size": 1024,
+    "task_names": [
+      "approved_self_service_process",
+      "legal_interpretation",
+      "nonstandard_contract_terms",
+      "dispute_or_claim",
+      "regulator_or_government_contact",
+      "sensitive_personal_data",
+      "security_incident",
+      "employment_action",
+      "intellectual_property_ownership",
+      "new_jurisdiction",
+      "material_external_commitment",
+      "incomplete_or_conflicting_facts",
+      "outside_approved_playbook",
+      "in_scope",
+      "requires_human_lawyer_attention"
+    ]
+  },
+  "model": {
+    "batch_size": 256,
+    "consistency_weight": 0.1,
+    "dropout": 0.15,
+    "ensemble_size": 3,
+    "epochs": 30,
+    "hidden_size": 256,
+    "learning_rate": 0.0003,
+    "max_tokens": 512,
+    "maximum_windows": 32,
+    "ranking_margin": 1.0,
+    "ranking_weight": 0.35,
+    "window_overlap": 64
+  },
+  "policy_name": "Northstar Legal Attention Policy",
+  "policy_version": "northstar-2.0",
+  "risk_control": {
+    "confidence_level": 0.95,
+    "maximum_false_clear_rate": 0.001,
+    "maximum_group_false_clear_rate": 0.01,
+    "maximum_observed_false_clearances": 0,
+    "minimum_group_attention_examples": 200
+  },
+  "seed": 20261004,
+  "train_sha256": "6f5ec23c6496deeeb167a96a3f936cd057d1f57be8293c21ef9f16a93cffc97b",
+  "training_code_version": 8,
+  "validation_sha256": "52e49458ab06b52e145743bf22a7a229d650c26afe17ff09956a71568e639eb6"
+}

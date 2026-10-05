@@ -1,0 +1,57 @@
+{
+  "capabilities": {
+    "conflicting_accounts": 24100,
+    "indirect_trigger": 24100,
+    "irrelevant_urgency": 24100,
+    "long_context": 24100,
+    "misleading_header": 24100,
+    "multi_trigger": 44000,
+    "negation_scope": 24100,
+    "quoted_text": 24100,
+    "temporal_update": 24100,
+    "typo_noise": 24100
+  },
+  "families": {
+    "contracts": 10200,
+    "corporate": 10200,
+    "disputes": 10200,
+    "employment": 10200,
+    "intellectual_property": 10200,
+    "legal_operations": 10200,
+    "marketing": 10200,
+    "privacy": 10200,
+    "product": 10200,
+    "security": 10200
+  },
+  "generators": {
+    "behavioral-c-adversarial": 5000,
+    "procedural-a": 75000,
+    "procedural-a-heldout": 12000,
+    "procedural-b-independent": 10000
+  },
+  "labels": {
+    "NO_HUMAN_LAWYER_ATTENTION": 51000,
+    "REQUIRES_HUMAN_LAWYER_ATTENTION": 51000
+  },
+  "pairs": 51000,
+  "scenario_types": {
+    "counterfactual": 47800,
+    "multi_trigger": 44000,
+    "out_of_distribution": 10200
+  },
+  "scenarios": 25500,
+  "seed": 20261004,
+  "split_sha256": {
+    "challenge": "a7ae63e89f7c87ffcc69ec2600672b1241b4ad1a0ac352a12e26606e008cdf8b",
+    "test": "cce2d590284bb0d88db9b7570107e7f96c22cdcc6ac307222e59d14f8c982bb9",
+    "train": "6f5ec23c6496deeeb167a96a3f936cd057d1f57be8293c21ef9f16a93cffc97b",
+    "validation": "52e49458ab06b52e145743bf22a7a229d650c26afe17ff09956a71568e639eb6"
+  },
+  "splits": {
+    "challenge": 5000,
+    "test": 10000,
+    "train": 75000,
+    "validation": 12000
+  },
+  "total": 102000
+}

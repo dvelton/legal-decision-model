@@ -5,10 +5,16 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
-from legal_decision_model.constants import LABELS, POLICY_VERSION, SITE_NAME
+from legal_decision_model.constants import (
+    LABELS,
+    LEGACY_POLICY_VERSION,
+    POLICY_VERSION,
+    SITE_NAME,
+)
 
 HEAD_FILE = "head.safetensors"
 MODEL_METADATA_FILE = "model.json"
+SUPPORTED_POLICY_VERSIONS = frozenset({LEGACY_POLICY_VERSION, POLICY_VERSION})
 
 
 @dataclass(frozen=True)
@@ -45,7 +51,7 @@ class ModelMetadata:
             raise ValueError(f"unexpected site {metadata.site!r}")
         if metadata.labels != LABELS:
             raise ValueError(f"unexpected label order {metadata.labels!r}")
-        if metadata.policy_version != POLICY_VERSION:
+        if metadata.policy_version not in SUPPORTED_POLICY_VERSIONS:
             raise ValueError(f"unexpected policy version {metadata.policy_version!r}")
         if metadata.clearance_threshold is not None and not (
             0 <= metadata.clearance_threshold <= 1

@@ -1,0 +1,66 @@
+name: Northstar Legal Attention Policy
+version: northstar-2.0
+description: >
+  Fictional policy for determining whether a fictional corporate request must
+  receive human lawyer attention.
+
+labels:
+  requires_attention: REQUIRES_HUMAN_LAWYER_ATTENTION
+  no_attention: NO_HUMAN_LAWYER_ATTENTION
+
+prerequisites:
+  approved_self_service_process:
+    default: true
+    reason: No approved self-service process fully resolves the request.
+
+triggers:
+  legal_interpretation:
+    reason: The request asks for individualized legal interpretation.
+  nonstandard_contract_terms:
+    reason: The request includes nonstandard contract terms.
+  dispute_or_claim:
+    reason: The request involves a dispute, claim, or threatened claim.
+  regulator_or_government_contact:
+    reason: A regulator or government authority is involved.
+  sensitive_personal_data:
+    reason: The request involves sensitive personal data.
+  security_incident:
+    reason: The request involves a security incident or suspected compromise.
+  employment_action:
+    reason: The request involves an individualized employment action.
+  intellectual_property_ownership:
+    reason: The request raises intellectual-property ownership.
+  new_jurisdiction:
+    reason: The request involves a jurisdiction outside the approved playbook.
+  material_external_commitment:
+    reason: The request would create a material external commitment.
+  incomplete_or_conflicting_facts:
+    reason: The supplied facts are incomplete or conflicting.
+  outside_approved_playbook:
+    reason: The request falls outside an approved self-service playbook.
+
+clearance:
+  success_reason: An approved self-service process fully resolves the complete request.
+  require_all_prerequisites: true
+  require_no_triggers: true
+
+risk_control:
+  confidence_level: 0.95
+  maximum_false_clear_rate: 0.001
+  maximum_observed_false_clearances: 0
+  maximum_group_false_clear_rate: 0.01
+  minimum_group_attention_examples: 200
+
+model:
+  ensemble_size: 3
+  hidden_size: 256
+  dropout: 0.15
+  epochs: 30
+  batch_size: 256
+  learning_rate: 0.0003
+  ranking_margin: 1.0
+  ranking_weight: 0.35
+  consistency_weight: 0.10
+  max_tokens: 512
+  window_overlap: 64
+  maximum_windows: 32

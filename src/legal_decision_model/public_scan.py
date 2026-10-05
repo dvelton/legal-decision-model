@@ -14,6 +14,8 @@ EXCLUDED_DIRECTORIES = {
     ".venv",
     "__pycache__",
     "artifacts",
+    "benchmark",
+    "policy-model.work",
 }
 TEXT_SUFFIXES = {
     "",

@@ -24,8 +24,9 @@ from legal_decision_model.constants import (
     BASE_MODEL_REVISION,
     DATA_DIR,
     LABELS,
+    LEGACY_POLICY_VERSION,
+    LEGACY_SPLIT_SIZES,
     MODEL_DIR,
-    POLICY_VERSION,
     SITE_NAME,
 )
 from legal_decision_model.model_artifacts import (
@@ -136,7 +137,11 @@ def train_model(
     max_false_clear_rate: float = 0.0,
 ) -> TrainSummary:
     """Train, calibrate, and save the conservative legal-attention head."""
-    validate_dataset(data_dir)
+    validate_dataset(
+        data_dir,
+        LEGACY_SPLIT_SIZES,
+        require_v2_metadata=False,
+    )
     train_records = read_jsonl(data_dir / "train.jsonl")
     validation_records = read_jsonl(data_dir / "validation.jsonl")
     dataset = SiteDataset(
@@ -184,7 +189,7 @@ def train_model(
             temperature=temperature,
             clearance_threshold=threshold,
             max_false_clear_rate=max_false_clear_rate,
-            policy_version=POLICY_VERSION,
+            policy_version=LEGACY_POLICY_VERSION,
             trained_at=datetime.now(UTC).isoformat(),
             training_rows=len(train_records),
             validation_rows=len(validation_records),

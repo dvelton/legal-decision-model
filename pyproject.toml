@@ -1,6 +1,6 @@
 [project]
 name = "legal-decision-model"
-version = "0.1.0"
+version = "0.2.0"
 description = "Synthetic proof of concept for conservative legal-attention routing"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -16,6 +16,7 @@ classifiers = [
 dependencies = [
     "fastapi==0.118.0",
     "laya==0.3.24",
+    "pyyaml==6.0.3",
     "stuntd[train]==0.1.2",
     "uvicorn==0.37.0",
 ]
@@ -28,6 +29,7 @@ dev = [
     "mypy==1.18.2",
     "pytest==8.4.2",
     "ruff==0.13.2",
+    "types-pyyaml==6.0.12.20250915",
 ]
 
 [build-system]
